@@ -1,4 +1,4 @@
-#include "radSens1v2.h"
+include "radSens1v2.h"
 
 //gcc -o test test.cpp radSens1v2.cpp -lwiringPi
 

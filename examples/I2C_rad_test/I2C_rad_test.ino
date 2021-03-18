@@ -1,12 +1,12 @@
-#include <Arduino.h>
-#include <Wire.h>
+#include "Arduino.h"
+#include "Wire.h"
 #include "radSens1v2.h"
+
 
 
 ClimateGuard_RadSens1v2 radSens(RS_DEFAULT_I2C_ADDRESS); /*Constructor of the class ClimateGuard_RadSens1v2,
                                                            sets the address parameter of I2C sensor.
                                                            Default address: 0x66.*/
-
 
 void setup() 
 {
@@ -17,7 +17,7 @@ void setup()
   
   uint8_t sensorChipId = radSens.getChipId(); /*Returns chip id, default value: 0x7D.*/
 
-  Serial.print("Chip id: 0xTT")
+  Serial.print("Chip id: 0x");
   Serial.println(sensorChipId, HEX);
 
   uint8_t firmWareVer = radSens.getFirmwareVersion(); /*Returns firmware version.*/
@@ -45,7 +45,7 @@ void setup()
 
   Serial.print("\t getSensitivity(): "); Serial.println(radSens.getSensitivity());
 
-  bool hvGeneratorState = radSens->getHVGeneratorState(); /*Returns state of high-voltage voltage Converter.
+  bool hvGeneratorState = radSens.getHVGeneratorState(); /*Returns state of high-voltage voltage Converter.
                                                            If return true -> on
                                                            If return false -> off or sensor isn't conneted*/
 
@@ -69,10 +69,8 @@ void setup()
 
 void loop(){
   Serial.print("Rad intensy dyanmic: ");
-
-  int RID := radSens.getRadIntensyDyanmic();
-
-  Serial.println(RID); /*Returns radiation intensity (dynamic period T < 123 sec).*/
+  int RAD = radSens.getRadIntensyDyanmic() ;
+  Serial.println(RAD); /*Returns radiation intensity (dynamic period T < 123 sec).*/
 
   Serial.print("Rad intensy static: ");
   
